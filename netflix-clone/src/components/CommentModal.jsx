@@ -3,7 +3,7 @@ import { Modal, Button, Form, ListGroup, Badge, Spinner, Alert } from 'react-boo
 
 // INSERISCI QUI IL TOKEN FORNITO DAL PROFESSORE (es. "Bearer eyJhbGciOi...")
 // Se non serve autenticazione nel vostro esercizio, lascialo vuoto ''
-const STRIVE_TOKEN = ''; 
+const STRIVE_TOKEN = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTQ3YWNiN2NjNzJlOTAwMTU0MzJhODEiLCJpYXQiOjE3ODMwODIxNjcsImV4cCI6MTc4NDI5MTc2N30.JlyPZztxDwDbdMCvVYMYOv0DsrOaNoLew3Sm5d3eWdE';
 
 const CommentModal = ({ show, handleClose, movieId }) => {
   const [comments, setComments] = useState([]);
@@ -30,7 +30,7 @@ const CommentModal = ({ show, handleClose, movieId }) => {
         setIsError(true);
       }
     } catch (error) {
-      setIsError(false);
+      setIsError(true);
     } finally {
       setIsLoading(false);
     }
