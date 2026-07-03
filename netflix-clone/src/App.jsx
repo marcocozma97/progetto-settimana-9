@@ -5,7 +5,7 @@ import { Dropdown } from 'react-bootstrap';
 import MyNavbar from './components/MyNavbar';
 import MyFooter from './components/MyFooter';
 import MovieGallery from './components/MovieGallery';
-import CommentModal from './components/CommentModal'; // <-- IMPORTA LA MODALE
+import CommentModal from './components/CommentModal'; 
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
