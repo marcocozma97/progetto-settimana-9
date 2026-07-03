@@ -1,0 +1,16 @@
+/* Classe per le locandine dei film */
+.movie-card {
+  transition: transform 0.2s ease-in-out; /* Rende l'animazione fluida */
+  cursor: pointer;
+  height: 350px; /* Fissiamo un'altezza per avere le card tutte allineate */
+  object-fit: cover; /* Evita che l'immagine si deformi */
+  border-radius: 4px;
+}
+
+/* Quando il mouse passa sopra, ingrandisce del 5% */
+.movie-card:hover {
+  transform: scale(1.05);
+  z-index: 10;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+}

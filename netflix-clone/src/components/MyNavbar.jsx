@@ -1,11 +1,22 @@
+import { useState } from 'react';
 import { Navbar, Nav, Container, Form } from 'react-bootstrap';
 
-const MyNavbar = () => {
+// Passiamo una "prop" chiamata onSearchSubmit che riceveremo da App.jsx
+const MyNavbar = ({ onSearchSubmit }) => {
+  // Stato locale: serve solo a memorizzare cosa scrive l'utente nel box
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Impedisce alla pagina di ricaricarsi (comportamento standard dei form HTML)
+    
+    if (inputValue.trim() !== '') {
+      onSearchSubmit(inputValue); // Invia la parola chiave ad App.jsx
+    }
+  };
+
   return (
-    // expand="lg" fa comparire l'hamburger menu sugli schermi piccoli
     <Navbar bg="dark" variant="dark" expand="lg" className="mb-4">
       <Container fluid className="px-4">
-        {/* Usiamo un po' di CSS inline per simulare il logo di Netflix */}
         <Navbar.Brand href="#home" style={{ color: '#E50914', fontWeight: 'bold', fontSize: '1.8rem' }}>
           NETFLIX
         </Navbar.Brand>
@@ -20,13 +31,15 @@ const MyNavbar = () => {
           </Nav>
           
           <div className="d-flex align-items-center text-white">
-            {/* Barra di ricerca temporanea, non funzionante per ora */}
-            <Form className="d-flex me-4">
+            {/* Avvolgiamo l'input in un vero Form HTML per intercettare l'invio (tasto Enter) */}
+            <Form className="d-flex me-4" onSubmit={handleSubmit}>
               <Form.Control
                 type="search"
                 placeholder="Search and press enter"
                 className="bg-dark text-white border-secondary rounded-0"
                 aria-label="Search"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)} // Aggiorna solo lo stato locale, senza fare fetch
               />
             </Form>
             <div className="me-4 fw-bold">KIDS</div>

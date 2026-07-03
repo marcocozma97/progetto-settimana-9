@@ -1,13 +1,24 @@
+import { useState } from 'react'; // <-- IMPORTANTE: Aggiungiamo useState per memorizzare la ricerca
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Dropdown } from 'react-bootstrap';
 import MyNavbar from './components/MyNavbar';
 import MyFooter from './components/MyFooter';
+import MovieGallery from './components/MovieGallery';
 
 function App() {
+  // Stato globale per la stringa cercata dall'utente
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Funzione che verrà chiamata dalla Navbar alla pressione del tasto INVIO
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
+
   return (
     <div className="bg-dark text-white min-vh-100">
-      <MyNavbar />
+      {/* Passiamo la funzione handleSearch alla Navbar */}
+      <MyNavbar onSearchSubmit={handleSearch} />
       
       <main className="container-fluid px-4">
         {/* Intestazione TV Shows e Generi */}
@@ -26,15 +37,26 @@ function App() {
             </Dropdown>
           </div>
           <div>
-            {/* Icone allineamento a destra */}
             <i className="bi bi-grid-fill fs-5 me-3 text-secondary"></i>
             <i className="bi bi-grid-3x3-gap-fill fs-5 text-secondary"></i>
           </div>
         </div>
 
-        {/* Qui andranno le nostre gallerie di film (Fase 4) */}
+        {/* --- GALLERIE DI FILM --- */}
         <div className="mt-5">
-           <h4 className="text-secondary">Sezione Film in arrivo...</h4>
+          
+          {/* Se searchQuery non è vuota, mostra la galleria dei risultati in alto */}
+          {searchQuery && (
+            <MovieGallery 
+              title={`Risultati della ricerca per: "${searchQuery}"`} 
+              searchQuery={searchQuery} 
+            />
+          )}
+
+          {/* Le nostre 3 saghe fisse richieste dall'esercizio */}
+          <MovieGallery title="Harry Potter" searchQuery="harry potter" />
+          <MovieGallery title="Lord of the Rings" searchQuery="lord of the rings" />
+          <MovieGallery title="Marvel's Avengers" searchQuery="avengers" />
         </div>
 
       </main>
