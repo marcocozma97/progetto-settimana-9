@@ -1,23 +1,36 @@
-import { useState } from 'react'; // <-- IMPORTANTE: Aggiungiamo useState per memorizzare la ricerca
+import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Dropdown } from 'react-bootstrap';
 import MyNavbar from './components/MyNavbar';
 import MyFooter from './components/MyFooter';
 import MovieGallery from './components/MovieGallery';
+import CommentModal from './components/CommentModal'; // <-- IMPORTA LA MODALE
 
 function App() {
-  // Stato globale per la stringa cercata dall'utente
   const [searchQuery, setSearchQuery] = useState('');
+  
+  // STATI PER LA MODALE
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMovieId, setSelectedMovieId] = useState(null);
 
-  // Funzione che verrà chiamata dalla Navbar alla pressione del tasto INVIO
   const handleSearch = (query) => {
     setSearchQuery(query);
   };
 
+  // Funzione che si attiva quando si clicca su un film
+  const handleMovieSelect = (id) => {
+    setSelectedMovieId(id);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedMovieId(null);
+  };
+
   return (
     <div className="bg-dark text-white min-vh-100">
-      {/* Passiamo la funzione handleSearch alla Navbar */}
       <MyNavbar onSearchSubmit={handleSearch} />
       
       <main className="container-fluid px-4">
@@ -42,26 +55,30 @@ function App() {
           </div>
         </div>
 
-        {/* --- GALLERIE DI FILM --- */}
+        {/* --- GALLERIE DI FILM (Passiamo handleMovieSelect a tutte) --- */}
         <div className="mt-5">
-          
-          {/* Se searchQuery non è vuota, mostra la galleria dei risultati in alto */}
           {searchQuery && (
             <MovieGallery 
               title={`Risultati della ricerca per: "${searchQuery}"`} 
               searchQuery={searchQuery} 
+              onMovieSelect={handleMovieSelect}
             />
           )}
 
-          {/* Le nostre 3 saghe fisse richieste dall'esercizio */}
-          <MovieGallery title="Harry Potter" searchQuery="harry potter" />
-          <MovieGallery title="Lord of the Rings" searchQuery="lord of the rings" />
-          <MovieGallery title="Marvel's Avengers" searchQuery="avengers" />
+          <MovieGallery title="Harry Potter" searchQuery="harry potter" onMovieSelect={handleMovieSelect} />
+          <MovieGallery title="Lord of the Rings" searchQuery="lord of the rings" onMovieSelect={handleMovieSelect} />
+          <MovieGallery title="Marvel's Avengers" searchQuery="avengers" onMovieSelect={handleMovieSelect} />
         </div>
-
       </main>
 
       <MyFooter />
+
+      {/* COMPONENTE MODALE RENDERIZZATO IN FONDO */}
+      <CommentModal 
+        show={showModal} 
+        handleClose={handleCloseModal} 
+        movieId={selectedMovieId} 
+      />
     </div>
   );
 }
