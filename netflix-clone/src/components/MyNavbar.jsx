@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { Navbar, Nav, Container, Form } from 'react-bootstrap';
 
-// Passiamo una "prop" chiamata onSearchSubmit che riceveremo da App.jsx
+
 const MyNavbar = ({ onSearchSubmit }) => {
-  // Stato locale: serve solo a memorizzare cosa scrive l'utente nel box
+ 
   const [inputValue, setInputValue] = useState('');
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Impedisce alla pagina di ricaricarsi (comportamento standard dei form HTML)
+    e.preventDefault(); 
     
     if (inputValue.trim() !== '') {
-      onSearchSubmit(inputValue); // Invia la parola chiave ad App.jsx
+      onSearchSubmit(inputValue); 
     }
   };
 

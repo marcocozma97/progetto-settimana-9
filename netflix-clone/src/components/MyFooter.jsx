@@ -39,7 +39,7 @@ const MyFooter = () => {
           </Col>
         </Row>
         
-        {/* Tasto e copyright */}
+        {/* Tasto e copyright*/}
         <Row>
           <Col>
             <Button variant="outline-secondary" className="rounded-0 mb-3" size="sm">

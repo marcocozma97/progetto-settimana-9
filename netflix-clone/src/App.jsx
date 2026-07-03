@@ -73,7 +73,7 @@ function App() {
 
       <MyFooter />
 
-      {/* COMPONENTE MODALE RENDERIZZATO IN FONDO */}
+      {/* COMPONENTE MODALE*/}
       <CommentModal 
         show={showModal} 
         handleClose={handleCloseModal} 

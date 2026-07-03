@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Modal, Button, Form, ListGroup, Badge, Spinner, Alert } from 'react-bootstrap';
 
-// INSERISCI QUI IL TOKEN FORNITO DAL PROFESSORE (es. "Bearer eyJhbGciOi...")
-// Se non serve autenticazione nel vostro esercizio, lascialo vuoto ''
 const STRIVE_TOKEN = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTQ3YWNiN2NjNzJlOTAwMTU0MzJhODEiLCJpYXQiOjE3ODMwODIxNjcsImV4cCI6MTc4NDI5MTc2N30.JlyPZztxDwDbdMCvVYMYOv0DsrOaNoLew3Sm5d3eWdE';
 
 const CommentModal = ({ show, handleClose, movieId }) => {
@@ -12,9 +10,9 @@ const CommentModal = ({ show, handleClose, movieId }) => {
   
   // Stati per il nuovo commento da inviare
   const [newComment, setNewComment] = useState('');
-  const [rating, setRating] = useState('5'); // Valore di default
+  const [rating, setRating] = useState('5'); 
 
-  // 1. Funzione per recuperare i commenti (GET)
+  // Funzione per recuperare i commenti (GET)
   const fetchComments = async () => {
     if (!movieId) return;
     setIsLoading(true);
@@ -44,7 +42,7 @@ const CommentModal = ({ show, handleClose, movieId }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show, movieId]);
 
-  // 2. Funzione per inviare un nuovo commento (POST)
+  // Funzione per inviare un nuovo commento (POST)
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!newComment.trim()) return;
@@ -66,9 +64,9 @@ const CommentModal = ({ show, handleClose, movieId }) => {
       });
 
       if (response.ok) {
-        setNewComment(''); // Svuota il campo di testo
-        setRating('5');    // Reset del voto
-        fetchComments();   // Ricarica la lista per vedere subito il nuovo commento!
+        setNewComment(''); 
+        setRating('5');   
+        fetchComments();  
       } else {
         alert("Errore durante l'invio del commento");
       }
@@ -104,7 +102,7 @@ const CommentModal = ({ show, handleClose, movieId }) => {
 
         <hr />
 
-        {/* Form per aggiungere un commento (uguale a Foto 4) */}
+        {/* Form per aggiungere un commento*/}
         <Form onSubmit={handleSubmit} className="text-center">
           <h5 className="mb-3 fw-bold">Add a comment</h5>
           

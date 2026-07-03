@@ -87,7 +87,7 @@ const MovieGallery = ({ title, searchQuery, onMovieSelect }) => {
               src={movie.Poster} 
               alt={movie.Title} 
               className="img-fluid movie-card w-100" 
-              onClick={() => onMovieSelect(movie.imdbID)} // <-- AGGIUNGI QUESTO CLICK!
+              onClick={() => onMovieSelect(movie.imdbID)} 
             />
           </Col>
         ))}
